@@ -21,14 +21,21 @@ require 'fileutils'
   "Gradle-jdk17",
   "Maven",
   "Maven-3-jdk-11",
+  "Maven-3-jdk-17",
+  "Maven-3-jdk-20",
+  "Maven-3-jdk-21",
+  "Maven-3-jdk-22",
   "Node",
   "PHP",
   "Python",
   "Python-3.6",
   "Python-3.7",
   "Python-3.8",
+  "Python-3.9",
+  "Python-3.10",
   "Ruby",
   "Scala",
+  "SBT1.10.0-Scala3.4.2",
 ]
 
 templatename = File.join("_templates", "BASE.md.erb")

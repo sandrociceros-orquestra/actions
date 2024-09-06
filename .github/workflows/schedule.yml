@@ -3,30 +3,32 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:
 
 jobs:
   actions:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: Set up Ruby 2.6
-        uses: actions/setup-ruby@v1
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.6.x
+          ruby-version: '2.6'
       - name: Render latest template
         run: |
           ruby build.rb
       - name: Commit to repository
         env:
-          GITHUB_TOKEN: ${{ secrets.github_token }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN_HAMMERHEAD }}
           COMMIT_MSG: |
             Generated new GitHub Actions templates
             skip-checks: true
         run: |
           # Hard-code user config
-          git config user.email "gareth@morethanseven.net"
-          git config user.name "Gareth Rushgrove"
+          git config user.email "team-hammerhead@snyk.io"
+          git config user.name "Team Hammerhead"
           git config --get-regexp "user\.(name|email)"
+          git config --global safe.directory $PWD
           # Update origin with token
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
           # Checkout the branch so we can push back to it
